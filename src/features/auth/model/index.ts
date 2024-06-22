@@ -4,11 +4,13 @@ import { loginValidator } from './validators.ts';
 export interface LoginRequest extends InferType<typeof loginValidator> {}
 
 export interface LoginResponse {
-  success: boolean;
-  message: string;
-  data: {
-    token: string;
-    user: unknown;
+  success?: boolean;
+  message?: string;
+  token?: string;
+  data?: {
+    id: string;
+    name: string;
+    email: string;
   };
 }
 

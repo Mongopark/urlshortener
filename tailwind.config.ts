@@ -12,8 +12,8 @@ export default {
     extend: {
       colors: {
         primary: '#3976E8',
-        other: '#3976E8',
-        secondary: '#00a859'
+        secondary: '#00a859',
+        other: '#5B94FE'
       },
       borderRadius: {
         large: '1.5rem'
@@ -43,7 +43,8 @@ export default {
         light: {
           ...themes['light'],
           primary: '#3976E8',
-          secondary: '#00a859'
+          secondary: '#00a859',
+          other: '#5B94FE'
         }
       }
     ]

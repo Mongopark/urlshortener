@@ -8,10 +8,12 @@ import { useAppDispatch } from '../../../hooks';
 
 type AuthState = {
   token: string | null;
+  isUserAuthenticated: boolean;
 };
 
 const initialState: AuthState = {
-  token: null
+  token: null,
+  isUserAuthenticated: false,
 };
 
 export function useAuthAction() {
@@ -64,7 +66,10 @@ export const authSlice = createSlice({
   reducers: {
     saveToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
-    }
+    },
+    setUserAuthenticated: (state, action: PayloadAction<boolean>) => {
+      state.isUserAuthenticated = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logout.fulfilled, (state) => {
@@ -77,4 +82,5 @@ export const authSlice = createSlice({
 });
 
 export const { saveToken } = authSlice.actions;
+export const { setUserAuthenticated } = authSlice.actions;
 export const { isAuthenticated } = authSlice.selectors;

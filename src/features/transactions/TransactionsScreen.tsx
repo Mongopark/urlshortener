@@ -7,6 +7,7 @@ import data from './model/TransactionsData.ts';
 import Pagination, { PaginationMobile } from './components/Pagination.tsx';
 import useBreakpoint from '../../hooks/useBreakpoint.ts';
 import CreateUrl from './components/CreateUrl.tsx';
+import Header from './components/Header.tsx';
 
 
 
@@ -29,7 +30,8 @@ export default function TransactionsScreen() {
 
   return (
     <div>
-      <div className='ms-1 md:ms-3'>
+      <Header title='PLACEHOLDER'/>
+      <div className='ms-1 md:ms-3 md:mt-5 mt-3'>
     <ComponentHeader title='Shorten URL'/>
     </div>  
     <div className="md:w-[30%] rounded-[10px] md:px-0 bg-white">

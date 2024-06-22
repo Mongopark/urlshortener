@@ -4,6 +4,9 @@ import { useFormik } from 'formik';
 import { AuthRequest } from '../model';
 import { Link } from 'react-router-dom';
 import { useAuthAction } from '../slice';
+import {
+  useLoginMutation, useRegisterMutation
+} from '../../../app/api';
 
 export default function AdminForm(props: {toggleRegister: ()=>void;}) {
   const fields = registerFields;
@@ -48,7 +51,7 @@ export default function AdminForm(props: {toggleRegister: ()=>void;}) {
           // disabled={loading || !(formik.isValid && formik.dirty)}
           disabled={loading}
         >                
-        <Link className="btn btn-sm btn-ghost text-white text-xs lg:text-sm" to="/home">
+        <Link className="btn btn-sm btn-ghost text-white text-xs md:text-sm" to="/home">
             Create Account
           </Link> {loading && <span className="loading loading-spinner"></span>}
         </button>  

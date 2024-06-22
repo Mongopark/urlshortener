@@ -11,6 +11,10 @@ export default function AuthScreen() {
     setShowRegister(prevState => !prevState);
   };
 
+  const registerUser = async () => {}
+
+  
+
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="flex items-center justify-center min-h-screen w-full">

@@ -1,0 +1,40 @@
+import React, { useEffect } from 'react';
+
+const Alert = (props: {type: string; text: string; dialog: boolean; setDialog: ()=>void;}) => {
+    const { type, text, dialog, setDialog} = props;
+    useEffect(() => {
+if (dialog){
+        // Set the alert to hide after 5 seconds (5000 milliseconds)
+        const timer = setTimeout(() => {
+          setDialog();
+        }, 5000);}
+    
+        // Clean up the timer when the component unmounts
+        // return () => clearTimeout(timer);
+      }, [dialog]);
+    
+  return (
+    <>
+    {dialog&&<div className="absolute top-0 left-0 md:w-50 w-25 z-50">
+      <div role="alert" className={`flex alert ${type==='success'?'bg-green-500':'bg-red-500'}`}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          viewBox="0 0 24 24"
+          className="stroke-info shrink-0 w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <span className='text-white md:text-sm text-[10px]'>{text}</span>
+      </div>
+    </div>}
+    </>
+  );
+};
+
+export default Alert;

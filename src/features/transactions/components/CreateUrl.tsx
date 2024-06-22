@@ -23,13 +23,13 @@ export default function AdminForm(props: {toggleRegister: ()=>void;}) {
         <div className="flex flex-col md:gap-5 gap-3">
           {fields.map((field) => (
             <label key={field.id} className="form-control">
-              <span className="label label-text">{field.label}</span>
+              <span className="label label-text md:text-sm text-[12px]">{field.label}</span>
               <input
                 id={field.id}
                 name={field.id}
                 type={field.type}
                 placeholder={field.placeholder}
-                className={`w-full input input-bordered flex items-center gap-2 ${
+                className={`w-full input input-bordered flex items-center gap-2 md:text-sm text-[12px] ${
                   formik.touched[field.id] && formik.errors[field.id] && 'input-error'
                 }`}
                 value={formik.values[field.id]}
@@ -46,7 +46,7 @@ export default function AdminForm(props: {toggleRegister: ()=>void;}) {
           className="btn btn-primary mt-8 w-full"
           disabled={loading}
         >                
-        <Link className="btn btn-sm text-white btn-ghost text-xs lg:text-sm" to="/home">
+        <Link className="btn btn-sm text-white btn-ghost text-xs md:text-sm" to="/home">
             Shorten URL
           </Link> {loading && <span className="loading loading-spinner"></span>}
         </button>
