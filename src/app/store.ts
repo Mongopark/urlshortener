@@ -11,35 +11,27 @@ import {
   REGISTER,
   REHYDRATE
 } from 'redux-persist';
-// import { authSlice, resetStore } from '../features/auth/slice';
 import localStorage from 'redux-persist/es/storage';
+import { authSlice, resetStore } from '../features/auth/slice';
 import { isDev } from './environment.ts';
 
 const rootPersistConfig = {
   key: 'root',
-  // blacklist: [authSlice.reducerPath],
+  blacklist: [api.reducerPath, authSlice.name],
   storage: localStorage
-  // stateReconciler: hardSet,
 };
-//
-// const authPersistConfig = {
-//   // key: authSlice.reducerPath,
-//   // storage: createSecureStore(),
-//   storage: localStorage
-// };
+
+const authPersistConfig = {
+  key: authSlice.name,
+  storage: localStorage
+};
 
 const appReducer = combineReducers({
-  [api.reducerPath]: api.reducer
-  // [authSlice.reducerPath]: persistReducer(authPersistConfig, authSlice.reducer)
+  [api.reducerPath]: api.reducer,
+  [authSlice.name]: persistReducer(authPersistConfig, authSlice.reducer)
 });
 
 export const rootReducer: typeof appReducer = (state, action) => {
-  // if (action.type === resetStore.type) {
-  //   localStorage
-  //     .removeItem('persist:' + authSlice.reducerPath)
-  //     .then(() => localStorage.removeItem('persist:root').then(() => location.reload()));
-  //   return appReducer(undefined, action);
-  // }
   return appReducer(state, action);
 };
 

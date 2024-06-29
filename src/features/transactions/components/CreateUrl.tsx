@@ -2,13 +2,21 @@ import { initialLoginFieldState, registerFields } from '../model/fields.ts';
 import { registerValidator } from '../../auth/model/validators.ts';
 import { useFormik } from 'formik';
 import { AuthRequest } from '../../auth/model/index.ts';
-import { Link } from 'react-router-dom';
 import { useAuthAction } from '../../auth/slice/index.ts';
+import { useUrlShortnerMutation } from '../../../app/api';
+import { toast } from 'react-toastify';
+import { useAppSelector } from '../../../hooks';
+import { RootState } from '../../../app/store';
 
-export default function AdminForm(props: {toggleRegister: ()=>void;}) {
+
+export default function CreateUrl(props: {toggleRegister: ()=>void;}) {
   const fields = registerFields;
-
-  const { authenticate, loading } = useAuthAction();
+    const { authenticate } = useAuthAction();
+    const currentUserId = useAppSelector((state: RootState) => state.auth.userId);
+  const [ urlShortner,
+    {
+      isLoading: shortenIsLoading,}
+    ] = useUrlShortnerMutation();
 
   const formik = useFormik<AuthRequest>({
     initialValues: initialLoginFieldState,
@@ -16,10 +24,40 @@ export default function AdminForm(props: {toggleRegister: ()=>void;}) {
     onSubmit: (values) => authenticate(values)
   });
 
+
+  
+  
+
+
+  const handleShorten = async () => {
+    try {
+      const response: any = await urlShortner({
+        name: formik.values.username,
+      original: formik.values.web,
+      description: formik.values.text,
+      user_id: currentUserId
+    });
+    if (formik.values.username === "" || formik.values.web === "" || formik.values.text === "" || currentUserId === "" ) {
+      // Handle error
+        toast('input all fields and try again', { type: 'error' });
+    } else if (response?.error) {
+        toast(response?.error?.data?.message, { type: 'error' });
+      } else {
+        // URL shortened successfully
+        toast(response?.data?.message || 'something went wrong, please try again', { type: response?.data?.status==='success' ? 'success' : 'info' });
+                  formik.resetForm();
+      }
+    } catch (error) {
+      // Handle error
+        toast(`Error shortening URL:${error ? 'input all fields and try again' : 'an error occured, please check your internet and try again'}`, { type: 'error' });
+        console.log(error);
+    }
+  };
+
   return (
-    <section>
+    <section>      
       <div className="p-5">
-      <form onSubmit={formik.handleSubmit}>
+      <form>
         <div className="flex flex-col md:gap-5 gap-3">
           {fields.map((field) => (
             <label key={field.id} className="form-control">
@@ -44,11 +82,12 @@ export default function AdminForm(props: {toggleRegister: ()=>void;}) {
         <button
           type="submit"
           className="btn btn-primary mt-8 w-full"
-          disabled={loading}
+          disabled={shortenIsLoading}
+          onClick={(handleShorten)}
         >                
-        <Link className="btn btn-sm text-white btn-ghost text-xs md:text-sm" to="/home">
+        <div className="btn btn-sm text-white btn-ghost text-xs md:text-sm">
             Shorten URL
-          </Link> {loading && <span className="loading loading-spinner"></span>}
+          </div> {shortenIsLoading && <span className="loading loading-spinner"></span>}
         </button>
       </form>
       </div>

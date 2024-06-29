@@ -15,16 +15,16 @@ export const loginFields: AuthField[] = [
     label: 'EMAIL ADDRESS',
     placeholder: 'Enter email',
     type: 'email',
-    leftIcon: 'fas fa-envelope',
-    rightIcon: 'fas fa-envelope'
+    leftIcon: 'far fa-envelope',
+    rightIcon: 'far fa-envelope'
   },
   {
     id: 'password',
     label: 'CREATE PASSWORD',
     placeholder: 'Enter password',
     type: 'password',
-    leftIcon: 'fas fa-eye',
-    rightIcon: 'fas fa-eye-slash'
+    leftIcon: 'far fa-eye',
+    rightIcon: 'far fa-eye-slash'
   }
 ];
 
@@ -34,24 +34,24 @@ export const registerFields: AuthField[] = [
     label: 'EMAIL ADDRESS',
     placeholder: 'Enter email',
     type: 'email',
-    leftIcon: 'fas fa-envelope',
-    rightIcon: 'fas fa-envelope'
+    leftIcon: 'far fa-envelope',
+    rightIcon: 'far fa-envelope'
   },
   {
     id: 'password',
     label: 'CREATE PASSWORD',
     placeholder: 'Enter password',
     type: 'password',
-    leftIcon: 'fas fa-eye',
-    rightIcon: 'fas fa-eye-slash'
+    leftIcon: 'far fa-eye',
+    rightIcon: 'far fa-eye-slash'
   },
   {
     id: 'confirm_password',
     label: 'CONFIRM PASSWORD',
     placeholder: 'Enter password',
     type: 'password',
-    leftIcon: 'fas fa-eye',
-    rightIcon: 'fas fa-eye-slash'
+    leftIcon: 'far fa-eye',
+    rightIcon: 'far fa-eye-slash'
   }
 ];
 

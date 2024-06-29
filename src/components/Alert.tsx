@@ -15,8 +15,8 @@ if (dialog){
     
   return (
     <>
-    {dialog&&<div className="absolute top-0 left-0 md:w-50 w-25 z-50">
-      <div role="alert" className={`flex alert ${type==='success'?'bg-green-500':'bg-red-500'}`}>
+    {dialog&&<div className="absolute md:top-20 top-16 left-0 md:w-8/12 w-25 z-50">
+      <div role="alert" className={`flex alert ${type==='success'?'bg-green-500':type==='error'?'bg-red-500':'bg-black'}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"

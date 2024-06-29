@@ -31,7 +31,7 @@ export const loginFields: AuthField[] = [
 export const registerFields: AuthField[] = [
   {
     id: 'username',
-    label: 'name',
+    label: 'Name',
     placeholder: 'Input name',
     type: 'text',
     leftIcon: 'fas fa-envelope',
@@ -39,7 +39,7 @@ export const registerFields: AuthField[] = [
   },
   {
     id: 'web',
-    label: 'website',
+    label: 'Website',
     placeholder: 'www.placeholder.com',
     type: 'text',
     leftIcon: 'fas fa-eye',
@@ -47,7 +47,7 @@ export const registerFields: AuthField[] = [
   },
   {
     id: 'text',
-    label: 'description',
+    label: 'Description',
     placeholder: 'Input description',
     type: 'text',
     leftIcon: 'fas fa-eye',

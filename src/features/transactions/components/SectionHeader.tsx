@@ -3,7 +3,7 @@ export interface CardProps {
     title?: string;
   }
 
-export default function ComponentHeader({
+export default function SectionHeader({
     title,
   }: CardProps) {
   

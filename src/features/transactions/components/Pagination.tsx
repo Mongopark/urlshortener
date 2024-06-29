@@ -23,24 +23,20 @@ export default function Pagination({
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <>
-    <button
-      onClick={() => paginate(1)}
-      disabled={currentPage === 1}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold flex items-center"
-    >
-      <ArrowBack color="black"/><ArrowBack color="black"/>
-    </button>
+    <div className='flex justify-between items-center w-full'>
     <button
       onClick={() => paginate(currentPage - 1)}
       disabled={currentPage === 1}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold"
+      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold flex"
     >
-      <ArrowBack color="black"/>
+      <ArrowBack color="black"/>Previous
     </button>
+
+
+<div>
     <button
       onClick={() => paginate(currentPage)}
-      className={`mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-4 bg-primary border-primary text-white text-[10px] md:text-sm rounded`}
+      className={`mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-4 bg-primarylight border-primarylight text-primary text-[10px] md:text-sm rounded`}
     >
       {currentPage}
     </button>
@@ -49,65 +45,65 @@ export default function Pagination({
     {currentPage + 1 > totalPages?<></>:<button
       onClick={() => paginate(currentPage+1)}
       disabled={currentPage + 1 > totalPages}
-      className={`mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold`}
+      className={`mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded text-[10px] md:text-sm`}
     >
       {currentPage+1}
     </button>}
 
 
-    <button
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold"
+    {currentPage + 2 > totalPages?<></>:<button
+      onClick={() => paginate(currentPage+2)}
+      disabled={currentPage + 2 > totalPages}
+      className={`mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded text-[10px] md:text-sm`}
     >
-      {currentPage === totalPages?"end":"..."}
-    </button>
-
-
-    {currentPage + 19 > totalPages?(currentPage + 9 > totalPages?<></>:<button
-      onClick={() => paginate(currentPage + 9)}
-      disabled={currentPage + 9 > totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold"
-    >
-    {currentPage + 9}
-  </button>):<button
-      onClick={() => paginate(currentPage + 19)}
-      disabled={currentPage + 19 > totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold"
-    >
-    {currentPage + 19}
-  </button>}
-
-
-    {currentPage + 20 > totalPages?(currentPage + 10 > totalPages?<></>:<button
-      onClick={() => paginate(currentPage + 10)}
-      disabled={currentPage + 10 > totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold"
-    >
-      {currentPage + 10}
-    </button>):
-    <button
-      onClick={() => paginate(currentPage + 20)}
-      disabled={currentPage + 20 > totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded text-[10px] md:text-sm font-semibold"
-    >
-      {currentPage + 20}
+      {currentPage+2}
     </button>}
 
 
-    {currentPage === totalPages?<></>:<button
+{currentPage > totalPages?<></>:
+    <button
+      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded text-[10px] md:text-sm"
+    >
+      {currentPage+3 > totalPages?"end":"..."}
+    </button>}
+
+
+{currentPage+5>totalPages?<></>:<button
+  onClick={() => paginate(currentPage + 4)}
+  disabled={currentPage === totalPages}
+  className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded"
+>
+  {totalPages-2}
+</button>}
+
+
+{currentPage+6>totalPages?<></>:<button
+  onClick={() => paginate(currentPage + 5)}
+  disabled={currentPage === totalPages}
+  className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded"
+>
+  {totalPages-1}
+</button>}
+
+
+    {currentPage+7>totalPages?<></>:<button
+      onClick={() => paginate(currentPage + 6)}
+      disabled={currentPage === totalPages}
+      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 rounded"
+    >
+      {totalPages}
+    </button>}
+    </div>
+
+
+    {currentPage === totalPages?<div></div>:<button
       onClick={() => paginate(currentPage + 1)}
       disabled={currentPage === totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold"
+      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold flex"
     >
-      <Arrow color="black"/>
+      Next<Arrow color="black"/>
     </button>}
-    {currentPage === totalPages?<></>:<button
-      onClick={() => paginate(totalPages)}
-      disabled={currentPage === totalPages}
-      className="mr-[1px] md:mr-2 px-2 py-[0px] md:py-1 md:px-3 md:border-2 border border-1 border-gray-300 rounded font-semibold flex items-center"
-    >
-      <Arrow color="black"/><Arrow color="black"/>
-    </button>}
-  </>
+  </div>
   );
 }
 

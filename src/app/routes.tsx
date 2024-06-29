@@ -1,24 +1,24 @@
-import { useRoutes } from 'react-router-dom';
-import ScrollToTop from '../components/ScrollToTop.tsx';
-import NotFound from '../components/NotFound.tsx';
-import AuthScreen from '../features/auth/AuthScreen.tsx';
-import TransactionsScreen from '../features/transactions/TransactionsScreen.tsx';
+import { useRoutes, Navigate } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
+import NotFound from '../components/NotFound';
+import AuthScreen from '../features/auth/AuthScreen';
+import HomeScreen from '../features/transactions/HomeScreen';
 import { useAppSelector } from '../hooks';
 
-export default function Routes() {
-  const isUserAuthenticated = useAppSelector((state) => state.isUserAuthenticated);
-
+export default function Routes() {  
+  const isUserAuthenticated = useAppSelector((state) => state.auth.isUserAuthenticated);
+  
 
   const routes = useRoutes([
     {
-      path: '/auth',
-      element: isUserAuthenticated?<AuthScreen />:<TransactionsScreen/>
+      path: '/',
+      element: !isUserAuthenticated ? <AuthScreen /> : <Navigate to="/home" replace />,
     },
     {
       path: '/home',
-      element: isUserAuthenticated?<AuthScreen />:<TransactionsScreen/>
+      element: isUserAuthenticated ? <HomeScreen /> : <Navigate to="/auth" replace />,
     },
-    { path: '*', element: <NotFound /> }
+    { path: '*', element: <NotFound /> },
   ]);
 
   return (

@@ -6,18 +6,19 @@ import {
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query/react';
 import { isDev } from './environment';
-import { LoginRequest, LoginResponse } from '../features/auth/model';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, ShortnerRequest } from '../features/auth/model';
+import { RootState } from './store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_BASE_URL
-  // prepareHeaders: (headers, { getState }) => {
-  // const token = (getState() as RootState).auth?.token;
-  // console.log('Getting token', token);
-  // if (token) {
-  //   headers.set('Authorization', `Bearer ${token}`);
-  // }
-  //   return headers;
-  // }
+  baseUrl: import.meta.env.VITE_BASE_URL,
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth?.token;
+    console.log('Getting token', token);
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
 });
 
 const baseQueryWithLogging: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -46,20 +47,27 @@ export const api = createApi({
         body: data
       })
     }),
-    register: builder.mutation<LoginResponse, LoginRequest>({
+    register: builder.mutation<RegisterResponse, RegisterRequest>({
       query: (data) => ({
         url: 'register',
         method: 'POST',
         body: data
       })
     }),
-    getUsers: builder.query<LoginResponse, void>({
-      query: () => ({
-        url: 'carts',
+    getUrls: builder.query<LoginResponse, string>({
+      query: (id) => ({
+        url: `user/url/${id}`,
         method: 'GET',
       }),
+    }),
+    urlShortner: builder.mutation<LoginResponse, ShortnerRequest>({
+      query: (data) => ({
+        url: 'url/shorten',
+        method: 'POST',
+        body: data
+      })
     }),
   })
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetUsersQuery } = api;
+export const { useLoginMutation, useRegisterMutation, useGetUrlsQuery, useUrlShortnerMutation } = api;

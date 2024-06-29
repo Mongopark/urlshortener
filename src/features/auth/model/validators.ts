@@ -8,8 +8,9 @@ export const loginValidator = Yup.object().shape({
 
 export const registerValidator = Yup.object().shape({
   first_name: Yup.string().label('FirstName').required(),
-  last_name: Yup.string().label('LastName').required(),
+  // last_name: Yup.string().label('LastName').required(),
   email: Yup.string().label('E-mail').email().required(),
-  phone_number: Yup.string().label('PhoneNumber').required(),
+  // phone_number: Yup.string().label('PhoneNumber').required(),
   password: Yup.string().label('Password').required()
+  
 });

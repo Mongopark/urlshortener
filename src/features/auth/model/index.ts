@@ -14,9 +14,31 @@ export interface LoginResponse {
   };
 }
 
+
+export interface RegisterResponse {
+  token: string;
+  message: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+}
+
+
 export type AuthRequest = LoginRequest & {
   [key: string]: string;
 };
+
+
+export interface ShortnerRequest {
+  name: string;
+      original: string;
+      description: string;
+      user_id: string;
+}
+
+
 
 export type AuthResponse = LoginResponse & {
   [key: string]: unknown;
